@@ -7,6 +7,7 @@ import Movie from './components/Movie';
 import MovieHeader from './components/MovieHeader';
 
 import EditMovieForm from './components/EditMovieForm'
+import AddMovieForm from "./components/AddMovieForm";
 
 import FavoriteMovieList from './components/FavoriteMovieList';
 
@@ -33,6 +34,8 @@ const App = (props) => {
     // On success update the movies list in state
     // and navigate the user to /movies
     // Hand this function down to the correct component
+
+    setMovies(movies.filter(item => (item.id !== Number(id))));
   }
 
   const addToFavorites = (movie) => {
@@ -53,7 +56,9 @@ const App = (props) => {
           <Routes>
             <Route path="movies/edit/:id" element={<EditMovieForm setMovies={setMovies}/>}/>
 
-            <Route path="movies/:id" element={<Movie />}/>
+            <Route path="/movies/add" element={<AddMovieForm setMovies={setMovies}/>}/>
+
+            <Route path="movies/:id" element={<Movie deleteMovie={deleteMovie} />}/>
 
             <Route path="movies" element={<MovieList movies={movies} />} />
 
